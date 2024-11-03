@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { addToStoredRead } from '../../utility/addToDB';
 
 const BookDetail = () => {
 
@@ -14,7 +15,7 @@ const BookDetail = () => {
   const {bookId: CuBookId, image, bookName, author, category, review, totalPages, publisher,yearOfPublishing,tags, rating} = book;
 
 
-  const handleMarkasRead = ()=>{
+  const handleMarkasRead = (id)=>{
 
     /**
      * underStand what to store or save => bookId
@@ -25,6 +26,7 @@ const BookDetail = () => {
      * if yes, do not add the book
      * 
     */
+   addToStoredRead(id)
   }
 
 
@@ -69,8 +71,8 @@ const BookDetail = () => {
           </div>
 
           <div className='space-x-4 my-5'>
-            <button className='btn btn-outline'>Mark as Read</button>
-            <button onClick={handleMarkasRead} className='btn bg-rose-600'>Add to Wishlist</button>
+            <button onClick={() => handleMarkasRead(bookId)}  className='btn btn-outline'>Mark as Read</button>
+            <button className='btn bg-rose-600'>Add to Wishlist</button>
           </div>
         </div>
       </div>
